@@ -68,17 +68,7 @@ app.get('/api/health', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, async () => {
+server.listen(PORT, () => {
   console.log(`🚀 Сервер запущен на порту ${PORT}`);
-  
-  try {
-    await sequelize.authenticate();
-    console.log('✅ База данных подключена успешно');
-    
-    // Синхронизация базы данных (убрать в продакшене)
-    await sequelize.sync({ force: false });
-    console.log('✅ База данных синхронизирована');
-  } catch (error) {
-    console.error('❌ Ошибка подключения к базе данных:', error);
-  }
+  console.log('✅ API готов к работе (база данных временно отключена)');
 });
