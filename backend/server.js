@@ -1,4 +1,3 @@
-// Backend сервер для платформы талантов
 const express = require('express');
 const cors = require('cors');
 const { Sequelize } = require('sequelize');
@@ -22,26 +21,30 @@ app.use(express.urlencoded({ extended: true }));
 
 // Подключение к базе данных
 const sequelize = new Sequelize(
+  process.env.DB_NAME || 'talent_platform',
+  process.env.DB_USER || 'postgres',
+  process.env.DB_PASSWORD || 'password',
   {
+    host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: false
   }
 );
 
 // Socket.io для чата в реальном времени
-io.on('connection', (socket) =
+io.on('connection', (socket) => {
   console.log('Пользователь подключился:', socket.id);
-
-  socket.on('join_room', (roomId) =
+  
+  socket.on('join_room', (roomId) => {
     socket.join(roomId);
     console.log(`Пользователь ${socket.id} присоединился к комнате ${roomId}`);
   });
 
-  socket.on('send_message', (data) =
+  socket.on('send_message', (data) => {
     socket.to(data.roomId).emit('receive_message', data);
   });
 
-  socket.on('disconnect', () =
+  socket.on('disconnect', () => {
     console.log('Пользователь отключился:', socket.id);
   });
 });
@@ -55,7 +58,7 @@ app.use('/api/events', require('./src/routes/events'));
 app.use('/api/chat', require('./src/routes/chat'));
 
 // Проверка здоровья
-app.get('/api/health', (req, res) =
+app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'Бэкенд платформы талантов работает',
@@ -63,15 +66,16 @@ app.get('/api/health', (req, res) =
   });
 });
 
+const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, async () =
+server.listen(PORT, async () => {
   console.log(`🚀 Сервер запущен на порту ${PORT}`);
-
+  
   try {
     await sequelize.authenticate();
     console.log('✅ База данных подключена успешно');
-
-    // Синхронизация базы данных
+    
+    // Синхронизация базы данных (убрать в продакшене)
     await sequelize.sync({ force: false });
     console.log('✅ База данных синхронизирована');
   } catch (error) {
