@@ -1,7 +1,7 @@
 {
   "name": "talent-platform-backend",
   "version": "1.0.0",
-  "description": "Backend ¤«п Ї« вд®а¬л в « ­в®ў",
+  "description": "Backend РґР»СЏ РїР»Р°С‚С„РѕСЂРјС‹ С‚Р°Р»Р°РЅС‚РѕРІ",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
-  "keywords": ["в « ­вл", "Ї« вд®а¬ ", "backend"],
-  "author": "Љ®¬ ­¤  Ї« вд®а¬л в « ­в®ў",
+  "keywords": ["С‚Р°Р»Р°РЅС‚С‹", "РїР»Р°С‚С„РѕСЂРјР°", "backend"],
+  "author": "РљРѕРјР°РЅРґР° РїР»Р°С‚С„РѕСЂРјС‹ С‚Р°Р»Р°РЅС‚РѕРІ",
   "license": "MIT"
 }
