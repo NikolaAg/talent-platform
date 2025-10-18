@@ -11,3 +11,10 @@ export const store = configureStore({
     projects: projectsSlice,
     events: eventsSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST'],
+      },
+    }),
+});
