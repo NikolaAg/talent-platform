@@ -1,5 +1,6 @@
 {
   "expo": {
+    "sdkVersion": "54.0.0"
     "name": "Платформа Талантов",
     "slug": "talent-platform",
     "version": "1.0.0",
